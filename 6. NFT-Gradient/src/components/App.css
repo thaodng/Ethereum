@@ -1,0 +1,9 @@
+/* Styles go here */
+/* https://www.w3schools.com/css/tryit.asp?filename=trycss_inline-block_span1 */
+
+.token {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  display: inline-block;
+}

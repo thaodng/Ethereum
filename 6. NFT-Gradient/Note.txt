@@ -1,0 +1,33 @@
+One cat could essentially worth more than a another cat
+This basically Ethreum create 'Interface' just because 'they' want tokens to compatible with wallets, exchanges marketplaces and thing like that they work for the same way
+Ganache is personal blockchain (like real blokchain network), but it run just on local computer (invaluable for blockchain developer)
+yarn add global truffle@5.0.5
+truffle-flattener
+
+caret operator(^)
+bang operator(!)
+asterisk(*):  /ˈæs.tɚ.ɪsk/
+comma(',')
+
+(the bin is the executable file)
+./node_modules/.bin/truffle-flattener ./node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol > src/contracts/ERC721full.sol
+migration smart contract like moving data from one database to another
+(changing the state from one state to another)
+truffle compile + truffle migrate
+truffle test
+
+adding some paintful unit test
+
+color hunt
+
+each token has a specific id
+
+require evaluate to true, there is nothing happen, it doesn't do anything, but if this evalute to false, none of the code below to execute and it triggers an exception (doesn't satisfied)
+
+how many actually does the tokens exists
+
+what actually does the mint function do? This call transfer function from address(0) to _to with _token
+
+- rewriting TRC21, using Solidity latest version (unfinish), applying KYC/AML, then CrowdSale
+(both on client & smart contract)
+- building web app (both on client & smart contract) to create NFT(based on ERC721) (unfinish) 

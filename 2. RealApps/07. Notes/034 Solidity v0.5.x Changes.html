@@ -1,0 +1,70 @@
+<html>
+                <head>
+                <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                <title>034 Solidity v0.5.x Changes</title>
+                </head>
+                <body>
+                <div class="container">
+                <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <p class="lead"><p>Starting with <strong>Solidity 0.5.0</strong> there are some <strong>minor changes</strong> that are not backward compatible with older version of Solidity (0.4.x). There are just a few  changes, which are explained bellow.</p><p>Any contract compiled by solidity compiler 0.4.x can be transformed in a contract compatible with version 0.5.x with only a couple of small changes.  </p><p><br>In the resource directory that contains all smart contracts and examples developed in the course, <strong>you'll find 2 versions</strong> (.sol files): one that can be compiled by solidity compiler 0.4.x and another that can be compiled by solidity compiler greater than 0.5.x</p><p><br><strong>Course resource directory:</strong></p><p><a href="https://drive.google.com/drive/folders/1x8u4ZBHeSL65Kn81DND0iR4IOmH30Efh?authuser=0" rel="noopener noreferrer" target="_blank">https://drive.google.com/drive/folders/1x8u4ZBHeSL65Kn81DND0iR4IOmH30Efh</a>  </p><p><br></p><p><strong>Exemple:</strong></p><p>lottery-solidity-0.4.x.sol  -&gt; should be compiled by solidity 0.4.29</p><p>lottery-solidity-0.5.x.sol  -&gt; should be compiled by solidity 0.5.0 or greater</p><p><br> If there is a single version (for exemple cryptos-fully-compliant-erc20-token.sol) it means that it can be compiled by any version of solidity compiler, with no modification needed.</p><p><br> If you use the Remix IDE, you can choose the compiler version in COMPILE TAB  </p><figure><img src="https://udemy-images.s3.amazonaws.com:443/redactor/raw/2019-01-04_11-27-09-844efeda47ebd68d2dd27f76d1cff855.png"></figure><p><br></p><p><strong>Changes in Solidity 0.5.0:</strong></p><p><br> <strong>1.</strong> The <strong>address data type</strong> was split into <strong>address</strong> and <strong>address payable</strong>, where only address payable provides the <strong>transfer() </strong>function.</p><p>If you want to transfer ether to an address, that address must be declared payable:  </p><pre class="prettyprint linenums">address payable public my_address; //in solidity 0.5.x
+address public my_address; 	//in solidity 0.4.x</pre><p>  </p><p><strong>2.</strong> <strong>The fallback function must be declared external, explicitly.</strong> It cannot be declared public.</p><pre class="prettyprint linenums">    //the fallback payable  function must be external in solidity 0.5.x
+    function () external {
+    }
+  
+    //this was possible in solidity 0.4.x
+    function () public{
+    }</pre><p><br></p><p><strong>3. The keccak256() function accepts only a single bytes argument. </strong>We use the <strong>abi.encodePacked()</strong> function to get the bytes argument if there are more values</p><p>        </p><pre class="prettyprint linenums">//solidity 0.5.x
+keccak256(abi.encodePacked(block.difficulty, block.timestamp, players.length));
+//solidity 0.4.x
+keccak256(block.difficulty, block.timestamp, players.length);</pre><p><br></p><p><strong>4.</strong> The string argument of any setter function must be declared in <strong>memory</strong> and the string return argument of any getter function must also be declared in <strong>memory</strong></p><p><br></p><pre class="prettyprint linenums">   //in solidity 0.5.x memory keyword is mandatory for string arguments
+ function setLocation(string memory _location) public{
+         location = _location;
+ }
+     //in solidity 0.5.x memory keyword is mandatory for return string argument
+     function getLocation() public view returns(string memory){
+         return location;
+     }  </pre><pre class="prettyprint linenums">  //solidity 0.4.x
+ function setLocation(string _location) public{
+         location = _location;
+ }
+ //solidity 0.4.x
+ function getLocation() public view returns(string){
+         return location;
+ }   </pre><p><br></p><p><strong>5.</strong> <strong>Explicit function visibility is mandatory in Solidity 0.5.x.</strong></p><p>To migrate from 0.4.x to 0.5.x add <code>public </code>to every function and constructor, and <code>external </code>to every fallback or interface function that does not  already specify its visibility. In solidity 0.5.x there is no more a default visibility for functions (in solidity 0.4.x a function is considered public if it’s not specified).</p><pre class="prettyprint linenums">  //in solidity 0.5.x visibilty specifier is mandatory
+     function setLocation(string memory _location) public{
+         location = _location;
+     }
+ 
+  
+   //in solidity 0.4.x by default a function is public
+     function setLocation(string memory _location) {
+         location = _location;
+     }
+</pre><p><br></p><p><strong>6. Explicitly state the data location </strong>for all variables of struct, array or mapping types (including function parameters)</p><pre class="prettyprint linenums">pragma solidity ^0.4.25;
+ contract A{
+     uint[] values;
+     function someFunction(uint[]  _values){
+         uint[] x;
+         values = _values;
+          
+         
+     }
+ }
+ 
+  
+ pragma solidity ^0.5.2;
+ contract A{
+     uint[] values;
+     function someFunction(uint[] memory  _values) public{
+         uint[] memory x;
+         values = _values;
+     }
+ } 
+</pre><p>For a full list of Solidity 0.5.x changes check this link bellow: <a href="https://solidity.readthedocs.io/en/v0.5.2/050-breaking-changes.html" rel="noopener noreferrer" target="_blank">https://solidity.readthedocs.io/en/v0.5.2/050-breaking-changes.html</a></p></p>
+                </div>
+                </div>
+                </div>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                </body>
+                </html>

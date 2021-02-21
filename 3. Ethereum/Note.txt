@@ -1,0 +1,86 @@
+immense junk asset gospel kiwi panel squirrel network icon home public elevator
+
+#Section1: Quick intro
+.https://github.com/ravinderdeol/blockchain-career-playbook
+.crystal clear: unambiguous (không mơ hồ), easily understood
+Ex: The house rules are crystal clear
+.the nitty-gritty: the basic facts of a siatuation (bản chất của vấn đề)
+
+#Section2: Understanding basic
+.stapler: /ˈsteɪ.plər/: a small device to push staple through pieces of paper.
+.staple: /ˈsteɪ.pəl/: a short, thin piece of wire used to fasten sheets of paper together.
+.escrow transfer: an agreement betwwen two people or organizations in which money or property is kept by a 
+third person or organization until a particular condition is met.
+.deposit: to put sth valuable, (esp money) in a bank or safe
+.withdraw: receive money from your account - remove sth or so from situation
+.get involved in: take part in
+.possession: (chiếm hữu)
+.ownership: (sở hữu)
+.deeds: ~certification. Ex: landing deed
+
+.Although blockchain is just early adopted, it is really revolutionary technology. Blockchain solves the 
+problems of manipulation. Because people don't trust organizations and coporations that much.
+You didn't have to rely on external services like Google, Facebook,v.. You can use decentralized source, 
+make your code open-source, promoting trust. 
+
+.It is not so easy you know to keep your apartment in the pocket all the time. This is where clearly 
+possession and ownership has to be separated.
+
+Computer: node, peer. I sure that you have heard this term before 
+(Tôi chắc rằng bạn đã nghe thuật ngữ này trước đây)
+
+Blockchain: public ledger of all transactions. 
+Decentralized Application: You need to wait until receive copy before you can see or make orther changes. Because 
+you are locked out of editing it until the other person is done with it, that's how databases work today. 
+Two owners can't be messing with the same record at once. 
+
+#Section3: Wallet
+.Option1: Metamask read data to get current balance from blockchain network thanks to external service called
+Infura (RestfulAPI), they internally have node running in the background to interact with the blockchain
+.Option2: We use browser, opening the faucet. This faucet browser interacting with some of backend, and the 
+backend is interacting with the blockchain node for sending transaction. They private key to sign transaction 
+is stored on the backend. Browser via backend via blockchain has access to to blockchain
+.Option3: Etherscan they also have a blockchain node run in the background
+
+.Send transaction:
+https://web3js.readthedocs.io/en/v1.2.0/web3-eth.html#sendtransaction
+
+.Valid transaction: 
+How does the blockchain know that the transaction is not malicious?
+How does the blockchain know it's allowed to transfer[value] from account [from] to account[to]?
+-> Using digital signature (v, r, s)
+
+#Section4: Solidity
+.All variables no matter the type are initialized with the default value by default
+.In solidity you have to be careful with variables, they are silently wrapping around. There is no
+warning whatsoever you have to take care of this yourself
+Ex: We have Unit8 euqal to 0, then we decrement value now it have 255.
+
+.Information was stored in the blockchain, not in the wallet or on the account.
+.Wallet store private key. Private key generate a publickey, and publickey generate an address
+
+.The member of the struct have the struct type of another struct (recursive isn't allowed)
+.Assert vs Require:
++) Because both are obviously just terminating the transaction
++) Solidity is compiling down to EVM byte code and both assert and require have a different byte code.
+So it's a different trigger in the byte codes that lets the EVM know to wait. We are going to terminate 
+the transaction. For revert it's 0xFD and for assert it's 0xFE, and EVM reacts differently to those.
+
+.Fallback function:
++) You can send money to a specific address but without interacting with a special function. This is 
+where the fallback function comes in.
++) when you don't have a payable keyword attached to a function or there is no function that matches 
+then they will be triggered an exception unless you have a fallback function.
+
+.Fallback function it like a catch all for either you do not interact with any function or none of the
+functions matches to the transaction encoded data field 
+.Call are against a local blockchain node
+
+against: next to and touching or being supported by (something)
+Ex: The police officer had him up against the wall, both arms behind his back.
+
+#Section05:
+.Create your own wallet then set 'allowance' for specify 'address'. 
+.Mở rộng là mình có thể tạo ví chi tiêu cho n - người dùng. Mỗi người dùng chi tiêu bằng cách chuyển tiền vào '_to'
+.Owner can withdraw unlimited amount
+https://ethereum-blockchain-developer.com/030-shared-wallet-project/00-overview/

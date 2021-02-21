@@ -1,0 +1,54 @@
+<html>
+                <head>
+                <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                <title>094 geth Usage (Cheetsheet)</title>
+                </head>
+                <body>
+                <div class="container">
+                <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <p class="lead"><p><strong>From the Terminal (Linux Console, Windows cmd etc):</strong></p><ul><li><p>Start geth on the main network (id = 1). Also starts an interactive JavaScript environment.</p></li></ul><p><code>geth console</code></p><ul><li><p>Start geth on Rinkeby (id = 4). Equivalent to: <em>geth --rinkeby console</em></p><p>If using geth on a private blockchain the network id of that private blockchain is mandatory to be specified.</p></li></ul><p><code>geth --networkid 4 console</code></p><ul><li><p>Create a new account</p></li></ul><p><code>geth account new</code></p><ul><li><p>Import private key that has been already saved in a file (64 chars)</p><p><code>geth account import privatekey-file</code></p></li></ul><ul><li><p>List accounts on Rinkeby</p></li></ul><p><code>geth --rinkeby account list</code></p><pre class="prettyprint linenums">INFO [11-19|16:12:24.647] Maximum peer count                       ETH=25 LES=0 total=25
+Account #0: {0310a619293df41947e20e103d516e64471fc2f6} keystore:///home/andrei/.ethereum/rinkeby/keystore/UTC--2018-11-19T12-52-21.655925707Z--0310a619293df41947e20e103d516e64471fc2f6</pre><ul><li><p>Attach geth to another instance that is running in another terminal</p></li></ul><p><code>geth attach console</code></p><p><br></p><p><strong>geth has been started with the console arguments. The following commands will use the JS/console API.</strong></p><ul><li><p>List JS big web3 object and we see all available methods</p></li></ul><p><code> <em>&gt;web3</em></code></p><ul><li><p>List accounts</p></li></ul><p><code> <em>&gt;eth.accounts</em></code></p><ul><li><p>Unlock an account</p></li></ul><p><code> <em>&gt;personal.unlockAccount("address", "password")</em></code></p><ul><li><p> Get Balance</p></li></ul><p><code> <em>&gt;eth.getBalance(eth.accounts[0])</em></code></p><p>or </p><p><code> <em>&gt;eth.getBalance("0x5c1b9C45C2c6BB0dbaed0CD3b0583272D9Aab6Bf")</em></code></p><ul><li><p>Start/Stop the miner process</p></li></ul><p><code>&gt;miner.start()</code></p><p><code>&gt; miner.stop()</code></p><ul><li><p>Start syncing on the net it's running</p></li></ul><p><code>&gt;&gt; eth.syncing</code></p><pre class="prettyprint linenums">{
+  currentBlock: 2097036,
+  highestBlock: 3367131,
+  knownStates: 4453251,
+  pulledStates: 4441106,
+  startingBlock: 1397765
+}</pre><ul><li><p>List peers</p></li></ul><p><code>&gt;admin.peers</code></p><p><br></p><p><strong>geth command options:</strong></p><p><strong> --nodiscover</strong> - disable peer discovery, they must be added manually</p><p><strong> --networkid ID</strong> - start geth on the network with the specified ID</p><p><strong> --rpc </strong>- enable rpc-http server</p><p><strong> --rpccorsdomai</strong>n - value comma separated list of domains from which to accept cross origin requests (browser enforced)</p><p><strong>-rpcaddr  IP_ADDR</strong> - &gt; listen on the IP_ADDR (default on localhost)</p><p><strong> --rpcport "8545</strong>" -&gt; port is listens on<br> <br>  </p><p><strong>A list of methods of each global object:</strong></p><p><strong>&gt; eth.</strong></p><pre class="prettyprint linenums">eth._requestManager            eth.getBlockUncleCount         eth.getWork                    
+eth.accounts                   eth.getCode                    eth.hashrate                   
+eth.blockNumber                eth.getCoinbase                eth.iban                       
+eth.call                       eth.getCompilers               eth.icapNamereg                
+eth.chainId                    eth.getGasPrice                eth.isSyncing                  
+eth.coinbase                   eth.getHashrate                eth.mining                     
+eth.compile                    eth.getMining                  eth.namereg                    
+eth.constructor                eth.getPendingTransactions     eth.pendingTransactions        
+eth.contract                   eth.getProof                   eth.protocolVersion            
+eth.defaultAccount             eth.getProtocolVersion         eth.resend                     
+eth.defaultBlock               eth.getRawTransaction          eth.sendIBANTransaction        
+eth.estimateGas                eth.getRawTransactionFromBlock eth.sendRawTransaction         
+eth.filter                     eth.getStorageAt               eth.sendTransaction            
+eth.gasPrice                   eth.getSyncing                 eth.sign                       
+eth.getAccounts                eth.getTransaction             eth.signTransaction            
+eth.getBalance                 eth.getTransactionCount        eth.submitTransaction          
+eth.getBlock                   eth.getTransactionFromBlock    eth.submitWork                 
+eth.getBlockNumber             eth.getTransactionReceipt      eth.syncing                    
+eth.getBlockTransactionCount   eth.getUncle 
+</pre><p><br></p><p><strong>&gt; personal.</strong></p><pre class="prettyprint linenums">personal._requestManager personal.getListAccounts personal.listWallets     personal.sendTransaction 
+personal.constructor     personal.getListWallets  personal.lockAccount     personal.sign            
+personal.deriveAccount   personal.importRawKey    personal.newAccount      personal.signTransaction 
+personal.ecRecover       personal.listAccounts    personal.openWallet      personal.unlockAccount </pre><p><br></p><p><strong>&gt; admin.</strong></p><pre class="prettyprint linenums">admin.addPeer              admin.getNodeInfo          admin.propertyIsEnumerable admin.stopRPC              
+admin.addTrustedPeer       admin.getPeers             admin.removePeer           admin.stopWS               
+admin.clearHistory         admin.hasOwnProperty       admin.removeTrustedPeer    admin.toLocaleString       
+admin.constructor          admin.importChain          admin.sleep                admin.toString             
+admin.datadir              admin.isPrototypeOf        admin.sleepBlocks          admin.valueOf              
+admin.exportChain          admin.nodeInfo             admin.startRPC             
+admin.getDatadir           admin.peers                admin.startWS  </pre><p><br></p><p><strong>&gt; miner.</strong></p><pre class="prettyprint linenums">miner.constructor          miner.propertyIsEnumerable miner.setRecommitInterval  miner.toString             
+miner.getHashrate          miner.setEtherbase         miner.start                miner.valueOf              
+miner.hasOwnProperty       miner.setExtra             miner.stop                 
+miner.isPrototypeOf        miner.setGasPrice          miner.toLocaleString  </pre></p>
+                </div>
+                </div>
+                </div>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                </body>
+                </html>
